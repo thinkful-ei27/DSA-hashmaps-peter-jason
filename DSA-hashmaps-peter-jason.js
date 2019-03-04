@@ -82,22 +82,67 @@ HashMap.MAX_LOAD_RATIO = 0.9;
 HashMap.SIZE_RATIO = 3;
 
 
+
+function palindrome(string){
+  string = string.toLowerCase();
+  const word = new HashMap();
+  for (let i = 0; i < string.length; i++){
+    try {
+      let count = word.get(string[i]);
+      word.set(string[i], ++count);
+    } catch (err){
+      word.set(string[i], 1);
+    }
+  }
+
+  const isEven = string.length % 2 === 0;
+  if (isEven){
+    for (let i = 0; i<string.length; i++){
+      const num = word.get(string[i]);
+      if (num % 2 !== 0){
+        return false;
+      }
+    }
+    return true;
+  } else {
+    let count = 0;
+    for (let i = 0; i< string.length; i++){
+      const num = word.get(string[i]);
+      if (num %2 !== 0){
+        count++;
+      console.log(num);
+      }
+    }
+  if (count > 1) {
+    return false;
+  } else {
+    return true;
+  }
+  }
+
+}
+
 function main(){
-  const lor = new HashMap();
-  lor.set('Hobbit','Bilbo');
-  lor.set('Hobbit','Frodo');
-  lor.set('Wizard','Gandolf');
-  lor.set('Human','Aragon');
-  lor.set('Elf','Legolas');
-  lor.set('Maiar','The Necromancer');
-  lor.set('Maiar','Sauron');
-  lor.set('RingBearer','Gollum');
-  lor.set('LadyOfLight','Galadriel');
-  lor.set('HalfElven','Arwen');
-  lor.set('Ent','Treebeard');
-  // console.log(lor._findSlot('Maiar')); // 17
-  // console.log(lor);
-  console.log(lor.get('Maiar')); // Sauron 
+  //const lor = new HashMap();
+  //lor.set('Hobbit','Bilbo');
+  //lor.set('Hobbit','Frodo');
+  //lor.set('Wizard','Gandolf');
+  //lor.set('Human','Aragon');
+  //lor.set('Elf','Legolas');
+  //lor.set('Maiar','The Necromancer');
+  //lor.set('Maiar','Sauron');
+  //lor.set('RingBearer','Gollum');
+  //lor.set('LadyOfLight','Galadriel');
+  //lor.set('HalfElven','Arwen');
+  //lor.set('Ent','Treebeard');
+  //// console.log(lor._findSlot('Maiar')); // 17
+  //// console.log(lor);
+  //console.log(lor.get('Maiar')); // Sauron 
+  console.log(palindrome('billy'));
+  console.log(palindrome('billie'));
+  console.log(palindrome('billib'));
+
+
 }
 
 main ();
