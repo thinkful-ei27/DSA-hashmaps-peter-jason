@@ -38,6 +38,21 @@ class HashMap {
     this.length++;
   }
 
+  set2(key, value){
+  const loadRatio = (this.length + 1)/ this._capacity;
+  if (loadRatio > HashMap.MAX_LOAD_RATIO){
+      this._resize(this._capacity * HashMap.SIZE_RATIO);
+  }
+  
+  const index = this._findSlot(key);
+  console.log(index);
+ if (index === undefined){
+    this._slots[index] = [];
+  }
+  this._slots[index].push(value);
+  this.length++;
+}
+
   remove(key) {
     const index = this._findSlot(key);
     const slot = this._slots[index];
@@ -185,9 +200,12 @@ function main(){
   //// console.log(lor._findSlot('Maiar')); // 17
   //// console.log(lor);
   //console.log(lor.get('Maiar')); // Sauron 
-  console.log(palindrome('billy'));
-  console.log(palindrome('billie'));
-  console.log(palindrome('billib'));
+  //console.log(palindrome('billy'));
+  //console.log(palindrome('billie'));
+  //console.log(palindrome('billib'));
+
+  const anagram = new HashMap();
+  console.log('anagram is ', anagram.set2('eats'));
 
 
 }
