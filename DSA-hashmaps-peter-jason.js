@@ -38,21 +38,6 @@ class HashMap {
     this.length++;
   }
 
-  set2(key, value){
-  const loadRatio = (this.length + 1)/ this._capacity;
-  if (loadRatio > HashMap.MAX_LOAD_RATIO){
-      this._resize(this._capacity * HashMap.SIZE_RATIO);
-  }
-  
-  const index = this._findSlot(key);
-  console.log(index);
- if (index === undefined){
-    this._slots[index] = [];
-  }
-  this._slots[index].push(value);
-  this.length++;
-}
-
   remove(key) {
     const index = this._findSlot(key);
     const slot = this._slots[index];
@@ -63,6 +48,38 @@ class HashMap {
     this.length--;
     this._deleted++;
   }
+
+  values() {
+    const values = [];
+    for (let i = 0; i < this._slots.length; i++) {
+      if (this._slots[i] !== undefined) {
+        values.push(this._slots[i].value);
+      }
+    }
+    return values;
+    /* return this._slots
+      .filter(slot => slot && !slot.deleted)
+      .map(slot => slot.value) */
+  }
+
+  keys() {
+    return this._slots
+      .filter(slot => slot && !slot.deleted)
+      .map(slot => slot.key);
+  }
+
+  /* 
+  Capi's Solution
+  pairs() {
+    return this._slots
+      .filter(slot => slot && !slot.deleted)
+  }
+  values() {
+    return this.pairs().map(slot => slot.value)
+  }
+  keys() {
+    return this.pairs().map(slot => slot.key)
+  } */
 
   _findSlot(key){
     const hash = HashMap._hashString(key);
@@ -157,30 +174,43 @@ loop over list of words
 return the map object that should now contain the arrays of anagrams
 } */
 
-
+function alphaSort(word) {
+  // word into array
+  const wordArr = Array.from(word);
+  return wordArr.sort().join('');
+}
 // code
 
+/* 
+Capi's solution -- so elegant
+words => {
+  const groups = new HashMap();
+  words.forEach(word => {
+    const key = alphaSort(key)
+    let group;
+    try {
+      group = groups.get(key);
+    } catch {
+      group = [];
+      groups.set(key, group);
+    }
+    group.push(word);
+  }
+  )
+} */
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+function anagramGrouper(words) {
+  const anagramGroups = new HashMap();
+  for (let i = 0; i < words.length; i++) {
+    try {
+      let group = anagramGroups.get(alphaSort(words[i]));
+      group.push(words[i]);
+    } catch (err) {
+      anagramGroups.set(alphaSort(words[i]), [words[i]]);
+    }
+  }
+  return anagramGroups.values();
+}
 
 
 
@@ -203,11 +233,10 @@ function main(){
   //console.log(palindrome('billy'));
   //console.log(palindrome('billie'));
   //console.log(palindrome('billib'));
-
-  const anagram = new HashMap();
-  console.log('anagram is ', anagram.set2('eats'));
-
-
+  const words = ['east', 'cars', 'acre', 'arcs', 'teas', 'eats', 'race'];
+  console.log(anagramGrouper(words));
+  console.log(alphaSort('east')); // aest
+  
 }
 
 main ();
