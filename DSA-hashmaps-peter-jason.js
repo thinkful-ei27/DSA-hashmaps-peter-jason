@@ -110,17 +110,61 @@ function palindrome(string){
       const num = word.get(string[i]);
       if (num %2 !== 0){
         count++;
-      console.log(num);
+        console.log(num);
       }
     }
-  if (count > 1) {
-    return false;
-  } else {
-    return true;
-  }
+    if (count > 1) {
+      return false;
+    } else {
+      return true;
+    }
   }
 
 }
+
+
+
+/* Anagram grouping
+Write an algorithm to group a list of words into anagrams
+Input/ Output
+Input: List of words: ['east', 'cars', 'acre', 'arcs', 'teas', 'eats', 'race']
+Output : Grouping of Anagrams: [['east', 'teas', 'eats'], ['cars', 'arcs'], ['acre', 'race']] */
+
+/* psuedocode
+function (words) {
+init a new Map() that will contain each word as a key
+loop over list of words
+  map.set(word[i])
+  if there 
+
+} */
+
+
+// code
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 function main(){
   //const lor = new HashMap();
