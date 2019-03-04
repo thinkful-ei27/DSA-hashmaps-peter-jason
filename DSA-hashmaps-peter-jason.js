@@ -134,9 +134,12 @@ Output : Grouping of Anagrams: [['east', 'teas', 'eats'], ['cars', 'arcs'], ['ac
 function (words) {
 init a new Map() that will contain each word as a key
 loop over list of words
-  map.set(word[i])
-  if there 
-
+  map.set(words[i])
+  if that index is undefined
+    create an array holding that key
+  other wise 
+    we will push that key into the array that is already at that index
+return the map object that should now contain the arrays of anagrams
 } */
 
 
